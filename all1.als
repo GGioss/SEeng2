@@ -1,31 +1,22 @@
  abstract sig Person{
 }
 
-sig License{
-}
-
-sig TaxiID{
-}
 
 some sig Passenger extends Person{
 }
 
 some sig Driver extends Person{
-license: one License,
+license: one Int,
 drives: lone Taxi
 }
 
 some sig Taxi{
-id: one TaxiID
+id: one Int
 }
 
-sig Request{
-reqfor: some Ride,
-from: one Passenger
-}
+
 
 sig Ride{
-origin: one Request,
 client: one Passenger,
 driver: one Driver,
 start: one Location,
@@ -66,10 +57,22 @@ fact noLocationInTwoAreas{
 
 fact noClosedPathRides{
 //Rides start and end in different places
-(no l1,l2: Location, r: Ride | r.start=l1 and r.start=l2 and l1=l2)
+(no l1,l2: Location, r: Ride | r.start=l1 and r.end=l2 and l1=l2)
+}
+
+pred show{
+}
+
+pred showMultiRidesForAPassenger{
+#Passenger = 1
+#Ride >1
+}
+
+pred showMultiplePassengers{
+#Passenger>1
 }
 
 
-pred show{}
-
-run show for 10
+run show for 8 
+run showMultiRidesForAPassenger for 5
+run showMultiplePassengers for 4 
