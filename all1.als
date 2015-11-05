@@ -15,6 +15,10 @@ id: one Int
 }{id>0}
 
 sig Request{
+<<<<<<< HEAD
+=======
+madeby: one Person,
+>>>>>>> origin/master
 madefor: one Ride
 }
 
@@ -70,6 +74,7 @@ fact noClosedPathRides{
 
 fact NoDiffLocationsSameCoords{
 //Locations that are different must have different coordinates
+<<<<<<< HEAD
 (all l1,l2: Location | l1!=l2 implies l1.lat!=l2.lat or l1.long!=l2.long)
 }
 
@@ -83,6 +88,11 @@ fact AllRidesHaveRequest{
 (#Ride=#Request)
 }
 
+=======
+(no l1,l2: Location | l1!=l2 and l1.lat=l2.lat and l1.long =l2.long)
+}
+
+>>>>>>> origin/master
 
 assert allLocationsInAreas{
 (all l: Location | #l.inarea=1)
